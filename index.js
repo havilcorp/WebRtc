@@ -44,5 +44,5 @@ io.on('connection', (socket) => {
 	});
 });
 
-server.listen(80);
+server.listen(433);
 console.log('Server started!');
