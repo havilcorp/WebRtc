@@ -42,5 +42,5 @@ io.on('connection', (socket) => {
 	});
 });
 
-server.listen(443);
+server.listen(80);
 console.log('Server started!');
