@@ -38,17 +38,21 @@ navigator.mediaDevices
 		addVideoStream(myVideo, stream);
 
 		peer.on('call', (call) => {
-            console.log('call');
+			console.log('call');
 			call.answer(stream);
 			const video = document.createElement('video');
+			video.onloadedmetadata = () => {
+				alert('asd2');
+				video.play();
+			};
 			call.on('stream', (userVideoStream) => {
-                console.log('stream 1');
+				console.log('stream 1');
 				addVideoStream(video, userVideoStream);
 			});
 		});
 
 		socket.on('user-connected', (userId) => {
-            console.log('user-connected', userId);
+			console.log('user-connected', userId);
 			connectToNewUser(userId, stream);
 		});
 	});
@@ -57,7 +61,7 @@ const connectToNewUser = (userId, stream) => {
 	const call = peer.call(userId, stream);
 	const video = document.createElement('video');
 	call.on('stream', (userVideoStream) => {
-        console.log('stream 2');
+		console.log('stream 2');
 		addVideoStream(video, userVideoStream);
 	});
 };
@@ -82,7 +86,7 @@ let messages = document.querySelector('.messages');
 send.addEventListener('click', (e) => {
 	if (text.value.length !== 0) {
 		socket.emit('message', text.value);
-        console.log('message 1');
+		console.log('message 1');
 		text.value = '';
 	}
 });
@@ -90,7 +94,7 @@ send.addEventListener('click', (e) => {
 text.addEventListener('keydown', (e) => {
 	if (e.key === 'Enter' && text.value.length !== 0) {
 		socket.emit('message', text.value);
-        console.log('message 2');
+		console.log('message 2');
 		text.value = '';
 	}
 });
