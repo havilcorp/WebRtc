@@ -60,6 +60,9 @@ navigator.mediaDevices
 const connectToNewUser = (userId, stream) => {
 	const call = peer.call(userId, stream);
 	const video = document.createElement('video');
+	video.setAttribute('autoplay', '');
+	video.setAttribute('muted', '');
+	video.setAttribute('playsinline', '');
 	call.on('stream', (userVideoStream) => {
 		console.log('stream 2');
 		addVideoStream(video, userVideoStream);
